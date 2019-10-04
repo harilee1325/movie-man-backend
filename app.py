@@ -25,19 +25,31 @@ def login_method(username,password):
     try:
         # logging in an already registered user
         count = 0
-        login_obj = db.user_profile_movie_man.find()
-        for record in login_obj:
-            if record['username'] == username:
-                if record['password'] == password:
-                    count = 1
-                    return dumps({'success':'yes','msg':'successfuly logged in','result': data})
-                    break
-                else:
-                    continue
-            else:
-                continue
-        if count == 0:
+        print username
+        print password
+
+        login_obj = db.user_profile_movie_man.find_one({'username':username,'password':password})
+        
+        if login_obj == None:
             return dumps({'success': 'no', 'msg': 'invalid credentials', 'result':None})
+        else:
+            output = {'username': login_obj['username'], 'mail':login_obj['email']
+                    , 'user_id': login_obj['user_id'], 'password': login_obj['password']}
+            return dumps({'success':'yes','msg':'successfuly logged in','result': output})
+
+        # for record in login_obj:
+        #     if record['username'] == username:
+        #         if record['password'] == password:
+        #             count = 1
+                   
+        #             return dumps({'success':'yes','msg':'successfuly logged in','result': output})
+        #             break
+        #         else:
+        #             continue
+        #     else:
+        #         continue
+        # if count == 0:
+        #     return dumps({'success': 'no', 'msg': 'invalid credentials', 'result':None})
 
     except Exception as e:
         return dumps({'error' : str(e)})
@@ -175,3 +187,5 @@ def get_user_data(username):
 def get_random_default():
     
     return str(random.randint(10000,99999))
+if __name__ == '__main__':
+    app.run()
