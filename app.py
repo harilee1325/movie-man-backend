@@ -78,10 +78,10 @@ def create_user():
             validate_obj = db.user_profile_movie_man.find()
             for record in validate_obj :
                 if record['username'] == user_name:
-                    return dumps({'success':'no', 'error':'username already exist'})
+                    return dumps({'success':'no', 'msg':'username already exist',,'result':None})
                     break
                 elif record['email'] == user_email:
-                    return dumps({'success':'no', 'error':'email is already in use'})
+                    return dumps({'success':'no', 'msg':'email is already in use', 'result':None})
                     break
                 else:
                     continue
@@ -116,7 +116,7 @@ def create_user():
             output = {'username': data['username'], 'mail':data['email']
             , 'user_id': data['user_id'], 'password': data['password']}
 
-            return dumps({'success':'yes','result' : output})
+            return dumps({'success':'yes','msg':'New user successfuly added','result' : output})
         else :
             # adding the first user to the database
             if user_name and user_email and password:
@@ -132,7 +132,7 @@ def create_user():
             output = {'username': data['username'], 'mail':data['email']
             , 'user_id': data['user_id'], 'password': data['password']}
 
-            return dumps({'success':'yes','result' : output})
+            return dumps({'success':'yes','msg':'New user successfuly added','result' : output})
 
     except Exception as e:
         return dumps({'error' : str(e)})
