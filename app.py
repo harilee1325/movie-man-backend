@@ -78,7 +78,7 @@ def create_user():
             validate_obj = db.user_profile_movie_man.find()
             for record in validate_obj :
                 if record['username'] == user_name:
-                    return dumps({'success':'no', 'msg':'username already exist',,'result':None})
+                    return dumps({'success':'no', 'msg':'username already exist','result':None})
                     break
                 elif record['email'] == user_email:
                     return dumps({'success':'no', 'msg':'email is already in use', 'result':None})
