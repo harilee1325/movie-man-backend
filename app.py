@@ -14,7 +14,7 @@ app = Flask(__name__)
 # route to clear collections
 @app.route("/")
 def hello():
-    db.user_profile_movie_man.remove()
+   # db.user_profile_movie_man.remove()
     return "Welcome to Movie Man!"
 
 
