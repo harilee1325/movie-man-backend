@@ -13,7 +13,6 @@ db = client.db
 
 app = Flask(__name__)
 
-route to clear collections
 @app.route("/")
 def hello():
    # db.user_profile_movie_man.remove()
