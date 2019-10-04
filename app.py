@@ -1,9 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,send_from_directory
 import json as simplejson
 import json
 from pymongo import MongoClient
 from bson.json_util import dumps
 import random
+import os
+
 
 client = MongoClient('mongodb://Harilee:harilee1329@haridatabase-shard-00-00-egsq3.mongodb.net:27017,haridatabase-shard-00-01-egsq3.mongodb.net:27017,haridatabase-shard-00-02-egsq3.mongodb.net:27017/test?ssl=true&replicaSet=hariDatabase-shard-0&authSource=admin&retryWrites=true&w=majority')
 db = client.db
@@ -18,6 +20,14 @@ def hello():
     return "Welcome to Movie Man!"
 
 
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
+
+                               
 
 @app.route("/login/<string:username>/<string:password>", methods=['GET'])
 def login_method(username,password):
