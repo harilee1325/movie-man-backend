@@ -34,8 +34,6 @@ def login_method(username,password):
     try:
         # logging in an already registered user
         count = 0
-        print username
-        print password
 
         login_obj = db.user_profile_movie_man.find_one({'username':username,'password':password})
         
@@ -101,12 +99,8 @@ def create_user():
                             if record['user_id'] == user_id:
                                 i=i-1
                                 user_id = get_random_default()
-                                print "------------------------------------------"
-                                print user_id
                                 break
                         if (i == count):
-                            print "--------------------------------------------"
-                            print user_id
                             break
                         else :
                             continue
